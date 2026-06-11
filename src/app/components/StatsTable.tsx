@@ -1,16 +1,12 @@
 'use client';
 
-import { PlayerStats } from '../types/types';
+import { PlayerStats, OnInputChangeFn, OnStatChangeFn } from '../types/types';
 import PlayerRow from './PlayerRow';
 
 interface StatsTableProps {
   players: PlayerStats[];
-  onInputChange: (id: number, field: 'number' | 'name', value: string) => void;
-  onStatChange: (
-    id: number, 
-    field: keyof Pick<PlayerStats, 'attackKill' | 'attackError' | 'attackCont' | 'serveAce' | 'serveCont' | 'serveError'>, 
-    amount: 1 | -1
-  ) => void;
+  onInputChange: OnInputChangeFn;
+  onStatChange: OnStatChangeFn;
 }
 
 export default function StatsTable({ players, onInputChange, onStatChange }: StatsTableProps) {
