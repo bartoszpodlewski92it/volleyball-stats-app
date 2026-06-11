@@ -65,7 +65,7 @@ export default function Home() {
   return (
     <main className="p-6 bg-slate-900 min-h-screen text-white relative">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Dashboard Statystyk Siatkarskich</h1>
+        <h1 className="text-2xl text-amber-400 font-bold">Dashboard Statystyk Siatkarskich</h1>
         <button 
           onClick={() => setIsModalOpen(true)}
           className="bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 px-4 rounded transition cursor-pointer text-sm"
@@ -80,7 +80,6 @@ export default function Home() {
         onStatChange={handleStatChange}
       />
 
-      {/* Nasz nowy, bezpieczny i ostylowany modal z Tailwind CSS */}
       <ConfirmModal 
         isOpen={isModalOpen}
         title="Ostrzeżenie"
