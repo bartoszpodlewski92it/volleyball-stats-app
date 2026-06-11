@@ -3,6 +3,7 @@
 import { PlayerStats, OnInputChangeFn, OnStatChangeFn } from '../types/types';
 import PlayerAttackCells from './PlayerAttackCells';
 import PlayerServeCells from './PlayerServeCells';
+import StatCell from './statCell';
 
 interface PlayerRowProps {
   player: PlayerStats;
@@ -35,6 +36,9 @@ export default function PlayerRow({ player, onInputChange, onStatChange }: Playe
 
       <PlayerServeCells player={player} onStatChange={onStatChange} />
       <PlayerAttackCells player={player} onStatChange={onStatChange} />
+      
+      {/* Dodana pojedyncza komórka bloku na końcu */}
+      <StatCell playerId={player.id} field="blockPoint" value={player.blockPoint} onStatChange={onStatChange} accentClass="text-purple-400" />
     </tr>
   );
 }

@@ -10,12 +10,14 @@ export interface PlayerStats {
   attackKill: number;
   attackError: number;
   attackCont: number;
+
+  blockPoint: number; // Blok punktowy
 }
 
 export type OnInputChangeFn = (id: number, field: 'number' | 'name', value: string) => void;
 
 export type OnStatChangeFn = (
   id: number, 
-  field: 'attackKill' | 'attackError' | 'attackCont' | 'serveAce' | 'serveCont' | 'serveError', 
+  field: 'attackKill' | 'attackError' | 'attackCont' | 'serveAce' | 'serveCont' | 'serveError' | 'blockPoint', 
   amount: 1 | -1
 ) => void;

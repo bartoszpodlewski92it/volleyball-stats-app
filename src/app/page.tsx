@@ -14,6 +14,7 @@ const initialRows: PlayerStats[] = Array.from({ length: 12 }, (_, i) => ({
   attackKill: 0,
   attackError: 0,
   attackCont: 0,
+  blockPoint: 0,
 }));
 
 export default function Home() {
@@ -25,7 +26,7 @@ export default function Home() {
 
   const handleStatChange = (
     id: number, 
-    field: 'attackKill' | 'attackError' | 'attackCont' | 'serveAce' | 'serveCont' | 'serveError', 
+    field: 'attackKill' | 'attackError' | 'attackCont' | 'serveAce' | 'serveCont' | 'serveError' | 'blockPoint', 
     amount: 1 | -1
   ) => {
     setPlayers(players.map(p => p.id === id ? { ...p, [field]: Math.max(0, p[field] + amount) } : p));
