@@ -3,7 +3,7 @@
 import { PlayerStats, OnInputChangeFn, OnStatChangeFn } from '../types/types';
 import PlayerAttackCells from './PlayerAttackCells';
 import PlayerServeCells from './PlayerServeCells';
-import StatCell from './statCell';
+import StatCell from './StatCell';
 
 interface PlayerRowProps {
   player: PlayerStats;

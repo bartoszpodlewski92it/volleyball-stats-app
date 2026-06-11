@@ -1,7 +1,7 @@
 'use client';
 
 import { PlayerStats, OnStatChangeFn } from './../types/types';
-import StatCell from './statCell';
+import StatCell from './StatCell';
 
 interface PlayerServeCellsProps {
   player: PlayerStats;
