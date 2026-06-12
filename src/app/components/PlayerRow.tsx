@@ -3,6 +3,7 @@
 import { PlayerStats, OnInputChangeFn, OnStatChangeFn } from '../types/types';
 import PlayerAttackCells from './PlayerAttackCells';
 import PlayerServeCells from './PlayerServeCells';
+import PlayerReceptionCells from './PlayerReceptionCells';
 import StatCell from './StatCell';
 
 interface PlayerRowProps {
@@ -35,9 +36,10 @@ export default function PlayerRow({ player, onInputChange, onStatChange }: Playe
       </td>
 
       <PlayerServeCells player={player} onStatChange={onStatChange} />
+      <PlayerReceptionCells player={player} onStatChange={onStatChange} />
       <PlayerAttackCells player={player} onStatChange={onStatChange} />
-      
       <StatCell playerId={player.id} field="blockPoint" value={player.blockPoint} onStatChange={onStatChange} accentClass="text-purple-400" />
+      <StatCell playerId={player.id} field="digSuccess" value={player.digSuccess} onStatChange={onStatChange} accentClass="text-emerald-400" />
     </tr>
   );
 }

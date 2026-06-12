@@ -1,11 +1,11 @@
 'use client';
 
-import { PlayerStats, OnStatChangeFn } from '../types/types';
+import { PlayerStats, OnStatChangeFn } from './../types/types';
 import StatControl from './StatControl';
 
 interface StatCellProps {
   playerId: number;
-  field: 'attackKill' | 'attackError' | 'attackCont' | 'serveAce' | 'serveCont' | 'serveError' | 'blockPoint';
+  field: 'attackKill' | 'attackError' | 'attackCont' | 'serveAce' | 'serveCont' | 'serveError' | 'blockPoint' | 'digSuccess' | 'receptionPerfect' | 'receptionGood' | 'receptionInaccurate' | 'receptionError';
   value: number;
   onStatChange: OnStatChangeFn;
   accentClass?: string;
