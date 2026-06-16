@@ -68,8 +68,9 @@ export default function Home() {
   }
 
   return (
-    <main className="p-6 bg-amber-950 min-h-screen text-white relative">
-      <div className="flex justify-between items-center mb-6">
+    <main className="py-6 px-0 bg-amber-950 min-h-screen text-white relative">
+      
+      <div className="flex justify-between items-center mb-6 px-6">
         <h1 className="text-2xl font-bold">Dashboard Statystyk Siatkarskich</h1>
         <button 
           onClick={() => setIsModalOpen(true)}

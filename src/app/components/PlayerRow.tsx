@@ -15,23 +15,23 @@ interface PlayerRowProps {
 export default function PlayerRow({ player, onInputChange, onStatChange }: PlayerRowProps) {
   return (
     <tr className="border-b border-slate-700 hover:bg-slate-750">
-      <td className="p-2 border border-slate-600">
+      <td className="p-2 border border-slate-600 w-16">
         <input
           type="text"
-          placeholder="N"
+          placeholder="Nr"
           value={player.number}
           onChange={(e) => onInputChange(player.id, 'number', e.target.value)}
           className="w-full bg-transparent text-center focus:bg-slate-700 outline-none p-1"
         />
       </td>
       
-      <td className="p-2 border border-slate-600">
+      <td className="p-2 border border-slate-600 w-80 min-w-[100px]">
         <input
           type="text"
-          placeholder="Wpisz zawodnika..."
+          placeholder="zawodnik"
           value={player.name}
           onChange={(e) => onInputChange(player.id, 'name', e.target.value)}
-          className="w-full bg-transparent focus:bg-slate-700 outline-none p-1"
+          className="w-full bg-transparent text-center px-3 focus:bg-slate-700 outline-none p-1"
         />
       </td>
 
