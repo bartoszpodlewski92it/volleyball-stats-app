@@ -14,8 +14,6 @@ export default function AddPlayerModal({ isOpen, onClose, onAdd }: AddPlayerModa
   const [error, setError] = useState('');
 
   if (!isOpen) return null;
-
-  // Walidacja numeru (tylko cyfry 0-99)
   const handleNumberChange = (val: string) => {
     setError('');
     if (val === '') {
@@ -87,7 +85,7 @@ export default function AddPlayerModal({ isOpen, onClose, onAdd }: AddPlayerModa
             <label className="block text-xs font-semibold text-slate-400 uppercase mb-1">Imię i Nazwisko (3-30 znaków)</label>
             <input
               type="text"
-              placeholder="np. Wilfredo Leon"
+              placeholder="np. Jan Kowalski"
               value={name}
               onChange={(e) => handleNameChange(e.target.value)}
               className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white outline-none focus:border-sky-500 text-sm"

@@ -119,7 +119,6 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
                 Suma Zespołu
               </td>
               
-              {/* Serwis Sumy */}
               <td className="p-2 border border-slate-600 text-center text-emerald-400">{players.reduce((sum, p) => sum + p.serveAce, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-amber-400">{players.reduce((sum, p) => sum + p.serveCont, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-rose-400">{players.reduce((sum, p) => sum + p.serveError, 0)}</td>
@@ -127,13 +126,11 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
                 {players.reduce((sum, p) => sum + p.serveAce + p.serveCont + p.serveError, 0)}
               </td>
 
-              {/* Przyjęcie Sumy */}
               <td className="p-2 border border-slate-600 text-center text-emerald-400">{players.reduce((sum, p) => sum + p.receptionPerfect, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-teal-400">{players.reduce((sum, p) => sum + p.receptionGood, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-amber-400">{players.reduce((sum, p) => sum + p.receptionInaccurate, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-rose-400">{players.reduce((sum, p) => sum + p.receptionError, 0)}</td>
               
-              {/* Obliczenia procentowe oraz łączna Suma Przyjęcia dla Zespołu */}
               {(() => {
                 const perf = players.reduce((sum, p) => sum + p.receptionPerfect, 0);
                 const good = players.reduce((sum, p) => sum + p.receptionGood, 0);
@@ -153,7 +150,6 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
                 );
               })()}
 
-              {/* Atak Sumy */}
               <td className="p-2 border border-slate-600 text-center text-emerald-400">{players.reduce((sum, p) => sum + p.attackKill, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-rose-400">{players.reduce((sum, p) => sum + p.attackError, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-amber-400">{players.reduce((sum, p) => sum + p.attackCont, 0)}</td>
@@ -166,8 +162,6 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
                   return totalAtk > 0 ? ((kill / totalAtk) * 100).toFixed(2) + '%' : '0.00%';
                 })()}
               </td>
-
-              {/* Blok i Obrona Sumy */}
               <td className="p-2 border border-slate-600 text-center text-purple-400">{players.reduce((sum, p) => sum + p.blockPoint, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-emerald-400">{players.reduce((sum, p) => sum + p.digSuccess, 0)}</td>
             </tr>
