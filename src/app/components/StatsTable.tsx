@@ -65,7 +65,7 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
         onScroll={handleTableScroll}
         className="overflow-x-auto w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
-        <table className="w-full border-collapse border-l border-t border-slate-700 bg-slate-800 text-left min-w-[1850px]">
+        <table className="w-full border-collapse border-l border-t border-slate-700 bg-slate-800 text-left min-w-[1950px] table-auto">
           <thead>
             <tr className="bg-slate-700 text-sm">
               <TableGroupHeader title="ZAWODNIK" colSpan={2} bgClass="bg-slate-800" textClass="text-slate-300" />
@@ -119,6 +119,7 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
                 Suma Zespołu
               </td>
               
+              {/* Serwis Sumy */}
               <td className="p-2 border border-slate-600 text-center text-emerald-400">{players.reduce((sum, p) => sum + p.serveAce, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-amber-400">{players.reduce((sum, p) => sum + p.serveCont, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-rose-400">{players.reduce((sum, p) => sum + p.serveError, 0)}</td>
@@ -126,11 +127,13 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
                 {players.reduce((sum, p) => sum + p.serveAce + p.serveCont + p.serveError, 0)}
               </td>
 
+              {/* Przyjęcie Sumy */}
               <td className="p-2 border border-slate-600 text-center text-emerald-400">{players.reduce((sum, p) => sum + p.receptionPerfect, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-teal-400">{players.reduce((sum, p) => sum + p.receptionGood, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-amber-400">{players.reduce((sum, p) => sum + p.receptionInaccurate, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-rose-400">{players.reduce((sum, p) => sum + p.receptionError, 0)}</td>
               
+              {/* Obliczenia procentowe oraz łączna Suma Przyjęcia dla Zespołu */}
               {(() => {
                 const perf = players.reduce((sum, p) => sum + p.receptionPerfect, 0);
                 const good = players.reduce((sum, p) => sum + p.receptionGood, 0);
@@ -150,6 +153,7 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
                 );
               })()}
 
+              {/* Atak Sumy */}
               <td className="p-2 border border-slate-600 text-center text-emerald-400">{players.reduce((sum, p) => sum + p.attackKill, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-rose-400">{players.reduce((sum, p) => sum + p.attackError, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-amber-400">{players.reduce((sum, p) => sum + p.attackCont, 0)}</td>
@@ -163,6 +167,7 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
                 })()}
               </td>
 
+              {/* Blok i Obrona Sumy */}
               <td className="p-2 border border-slate-600 text-center text-purple-400">{players.reduce((sum, p) => sum + p.blockPoint, 0)}</td>
               <td className="p-2 border border-slate-600 text-center text-emerald-400">{players.reduce((sum, p) => sum + p.digSuccess, 0)}</td>
             </tr>
@@ -175,7 +180,7 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
         onScroll={handleFakeScroll}
         className="fixed bottom-0 left-0 w-full overflow-x-auto z-50 bg-transparent"
       >
-        <div className="w-[1850px] h-[12px]"></div>
+        <div className="w-[1950px] h-[12px]"></div>
       </div>
     </div>
   );
