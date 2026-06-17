@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { PlayerStats, OnInputChangeFn, OnStatChangeFn } from '../types/types';
 import PlayerRow from './PlayerRow';
 
@@ -65,12 +65,12 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
         onScroll={handleTableScroll}
         className="overflow-x-auto w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
-        <table className="w-full border-collapse border-l border-t border-slate-700 bg-slate-800 text-left min-w-[1600px]">
+        <table className="w-full border-collapse border-l border-t border-slate-700 bg-slate-800 text-left min-w-[1850px]">
           <thead>
             <tr className="bg-slate-700 text-sm">
               <TableGroupHeader title="ZAWODNIK" colSpan={2} bgClass="bg-slate-800" textClass="text-slate-300" />
               <TableGroupHeader title="SERWIS" colSpan={4} bgClass="bg-sky-600/30" textClass="text-sky-400" />
-              <TableGroupHeader title="PRZYJĘCIE" colSpan={4} bgClass="bg-yellow-600/30" textClass="text-yellow-400" />
+              <TableGroupHeader title="PRZYJĘCIE" colSpan={8} bgClass="bg-yellow-600/30" textClass="text-yellow-400" />
               <TableGroupHeader title="ATAK" colSpan={4} bgClass="bg-orange-600/30" textClass="text-orange-400" />
               <TableGroupHeader title="BLOK" colSpan={1} bgClass="bg-purple-600/30" textClass="text-purple-400" />
               <TableGroupHeader title="DEFENSYWA" colSpan={1} bgClass="bg-emerald-600/30" textClass="text-emerald-400" />
@@ -88,6 +88,10 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
               <SubHeader title="Dobre" extraClass="bg-teal-950/20 text-teal-400 text-xs" />
               <SubHeader title="Niedokładne" extraClass="bg-amber-950/20 text-amber-400 text-xs" />
               <SubHeader title="Błędne" extraClass="bg-rose-950/20 text-rose-400 text-xs" />
+              <SubHeader title="Perfekcyjne %" extraClass="font-bold text-emerald-400 text-xs" />
+              <SubHeader title="Dobre %" extraClass="font-bold text-teal-400 text-xs" />
+              <SubHeader title="Pozytywne %" extraClass="font-bold text-yellow-400 text-xs" />
+              <SubHeader title="Suma" extraClass="font-bold text-sky-400 text-xs" />
 
               <SubHeader title="Skończone (+)" extraClass="bg-emerald-950/30 text-emerald-400" />
               <SubHeader title="Błędy (-)" extraClass="bg-rose-950/30 text-rose-400" />
@@ -108,6 +112,61 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
               />
             ))}
           </tbody>
+          
+          <tfoot className="bg-slate-900 font-bold border-t-2 border-slate-600 sticky bottom-0 z-10">
+            <tr>
+              <td colSpan={2} className="p-3 border border-slate-600 text-center uppercase tracking-wider text-sm text-slate-300">
+                Suma Zespołu
+              </td>
+              
+              <td className="p-2 border border-slate-600 text-center text-emerald-400">{players.reduce((sum, p) => sum + p.serveAce, 0)}</td>
+              <td className="p-2 border border-slate-600 text-center text-amber-400">{players.reduce((sum, p) => sum + p.serveCont, 0)}</td>
+              <td className="p-2 border border-slate-600 text-center text-rose-400">{players.reduce((sum, p) => sum + p.serveError, 0)}</td>
+              <td className="p-2 border border-slate-600 text-center text-sky-400">
+                {players.reduce((sum, p) => sum + p.serveAce + p.serveCont + p.serveError, 0)}
+              </td>
+
+              <td className="p-2 border border-slate-600 text-center text-emerald-400">{players.reduce((sum, p) => sum + p.receptionPerfect, 0)}</td>
+              <td className="p-2 border border-slate-600 text-center text-teal-400">{players.reduce((sum, p) => sum + p.receptionGood, 0)}</td>
+              <td className="p-2 border border-slate-600 text-center text-amber-400">{players.reduce((sum, p) => sum + p.receptionInaccurate, 0)}</td>
+              <td className="p-2 border border-slate-600 text-center text-rose-400">{players.reduce((sum, p) => sum + p.receptionError, 0)}</td>
+              
+              {(() => {
+                const perf = players.reduce((sum, p) => sum + p.receptionPerfect, 0);
+                const good = players.reduce((sum, p) => sum + p.receptionGood, 0);
+                const totalRc = players.reduce((sum, p) => sum + p.receptionPerfect + p.receptionGood + p.receptionInaccurate + p.receptionError, 0);
+                
+                const totalPerfPct = totalRc > 0 ? ((perf / totalRc) * 100).toFixed(2) + '%' : '0.00%';
+                const totalGoodPct = totalRc > 0 ? ((good / totalRc) * 100).toFixed(2) + '%' : '0.00%';
+                const totalPosPct = totalRc > 0 ? (((perf + good) / totalRc) * 100).toFixed(2) + '%' : '0.00%';
+
+                return (
+                  <>
+                    <td className="p-2 border border-slate-600 text-center text-emerald-500 bg-emerald-950/20">{totalPerfPct}</td>
+                    <td className="p-2 border border-slate-600 text-center text-teal-500 bg-teal-950/20">{totalGoodPct}</td>
+                    <td className="p-2 border border-slate-600 text-center text-yellow-500 bg-yellow-950/20">{totalPosPct}</td>
+                    <td className="p-2 border border-slate-600 text-center text-sky-400 bg-sky-950/20">{totalRc}</td>
+                  </>
+                );
+              })()}
+
+              <td className="p-2 border border-slate-600 text-center text-emerald-400">{players.reduce((sum, p) => sum + p.attackKill, 0)}</td>
+              <td className="p-2 border border-slate-600 text-center text-rose-400">{players.reduce((sum, p) => sum + p.attackError, 0)}</td>
+              <td className="p-2 border border-slate-600 text-center text-amber-400">{players.reduce((sum, p) => sum + p.attackCont, 0)}</td>
+              <td className="p-2 border border-slate-600 text-center text-orange-500 bg-orange-950/20">
+                {(() => {
+                  const kill = players.reduce((sum, p) => sum + p.attackKill, 0);
+                  const err = players.reduce((sum, p) => sum + p.attackError, 0);
+                  const cont = players.reduce((sum, p) => sum + p.attackCont, 0);
+                  const totalAtk = kill + err + cont;
+                  return totalAtk > 0 ? ((kill / totalAtk) * 100).toFixed(2) + '%' : '0.00%';
+                })()}
+              </td>
+
+              <td className="p-2 border border-slate-600 text-center text-purple-400">{players.reduce((sum, p) => sum + p.blockPoint, 0)}</td>
+              <td className="p-2 border border-slate-600 text-center text-emerald-400">{players.reduce((sum, p) => sum + p.digSuccess, 0)}</td>
+            </tr>
+          </tfoot>
         </table>
       </div>
 
@@ -116,7 +175,7 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
         onScroll={handleFakeScroll}
         className="fixed bottom-0 left-0 w-full overflow-x-auto z-50 bg-transparent"
       >
-        <div className="w-[1600px] h-[12px]"></div>
+        <div className="w-[1850px] h-[12px]"></div>
       </div>
     </div>
   );
