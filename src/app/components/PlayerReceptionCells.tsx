@@ -10,7 +10,7 @@ interface PlayerReceptionCellsProps {
 
 export default function PlayerReceptionCells({ player, onStatChange }: PlayerReceptionCellsProps) {
   const total = player.receptionPerfect + player.receptionGood + player.receptionInaccurate + player.receptionError;
-  
+
   const perfPct = total > 0 ? ((player.receptionPerfect / total) * 100).toFixed(2) : '0.00';
   const goodPct = total > 0 ? ((player.receptionGood / total) * 100).toFixed(2) : '0.00';
   const posPct = total > 0 ? (((player.receptionPerfect + player.receptionGood) / total) * 100).toFixed(2) : '0.00';
@@ -21,7 +21,7 @@ export default function PlayerReceptionCells({ player, onStatChange }: PlayerRec
       <StatCell playerId={player.id} field="receptionGood" value={player.receptionGood} onStatChange={onStatChange} accentClass="text-teal-400" />
       <StatCell playerId={player.id} field="receptionInaccurate" value={player.receptionInaccurate} onStatChange={onStatChange} accentClass="text-amber-400" />
       <StatCell playerId={player.id} field="receptionError" value={player.receptionError} onStatChange={onStatChange} accentClass="text-rose-400" />
-      
+
       <td className="p-2 border border-slate-600 text-center font-bold text-sm text-emerald-500 bg-emerald-950/10">
         {perfPct}%
       </td>
@@ -30,7 +30,7 @@ export default function PlayerReceptionCells({ player, onStatChange }: PlayerRec
       </td>
       <td className="p-2 border border-slate-600 text-center font-bold text-base text-yellow-500 bg-yellow-950/10">
         {posPct}%
-      </td>   
+      </td>
       <td className="p-2 border border-slate-600 text-center font-bold text-base text-sky-400 bg-sky-950/10">
         {total}
       </td>
