@@ -9,7 +9,10 @@ export const getTeamTotalPoints = (players: PlayerStats[]): number => {
 };
 
 export const getTeamSum = (players: PlayerStats[], field: keyof PlayerStats): number => {
-  return players.reduce((sum, p) => sum + (p[field] as number), 0);
+  return players.reduce((sum, p) => {
+    const val = p[field];
+    return sum + (typeof val === 'number' ? val : 0);
+  }, 0);
 };
 
 export const getTeamReceptionStats = (players: PlayerStats[]) => {
@@ -33,8 +36,11 @@ export const getTeamAttackStats = (players: PlayerStats[]) => {
   const cont = getTeamSum(players, 'attackCont');
   const total = kill + err + cont;
 
+  const effPct = total > 0 ? (((kill - err) / total) * 100).toFixed(2) + '%' : '0.00%';
+
   return {
     total,
     killPct: total > 0 ? ((kill / total) * 100).toFixed(2) + '%' : '0.00%',
+    effPct,
   };
 };

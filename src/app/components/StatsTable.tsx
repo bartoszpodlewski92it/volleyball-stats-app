@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { PlayerStats, OnInputChangeFn, OnStatChangeFn } from '../types/types';
 import StatsTableContent from './StatsTableContent';
 import { 
@@ -18,6 +18,23 @@ interface StatsTableProps {
 export default function StatsTable({ players, onInputChange, onStatChange }: StatsTableProps) {
   const fakeScrollRef = useRef<HTMLDivElement>(null);
   const tableContainerRef = useRef<HTMLDivElement>(null);
+  const [tableWidth, setTableWidth] = useState(2100);
+
+  useEffect(() => {
+    if (!tableContainerRef.current) return;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const tableEl = entry.target.querySelector('table');
+        if (tableEl) {
+          setTableWidth(tableEl.offsetWidth);
+        }
+      }
+    });
+
+    resizeObserver.observe(tableContainerRef.current);
+    return () => resizeObserver.disconnect();
+  }, [players]);
 
   const handleFakeScroll = () => {
     if (fakeScrollRef.current && tableContainerRef.current) {
@@ -57,7 +74,7 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
         onScroll={handleFakeScroll}
         className="fixed bottom-0 left-0 w-full overflow-x-auto z-50 bg-transparent"
       >
-        <div className="w-[2100px] h-[12px]"></div>
+        <div style={{ width: `${tableWidth}px` }} className="h-[12px]"></div>
       </div>
     </div>
   );

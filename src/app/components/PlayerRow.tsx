@@ -5,6 +5,7 @@ import PlayerAttackCells from './PlayerAttackCells';
 import PlayerServeCells from './PlayerServeCells';
 import PlayerReceptionCells from './PlayerReceptionCells';
 import StatCell from './StatCell';
+import { calculatePoints } from '../helpers/statCalculators';
 
 interface PlayerRowProps {
   player: PlayerStats;
@@ -13,10 +14,10 @@ interface PlayerRowProps {
 }
 
 export default function PlayerRow({ player, onInputChange, onStatChange }: PlayerRowProps) {
-  const totalPoints = player.serveAce + player.attackKill + player.blockPoint;
+  const totalPoints = calculatePoints(player);
 
   return (
-    <tr className="border-b border-slate-700 hover:bg-slate-750/50 transition-colors">
+    <tr className="border-b border-slate-700 hover:bg-slate-700/40 transition-colors">
       <td className="p-3 border border-slate-600 w-16 text-center font-bold text-slate-300 bg-slate-900/30">
         {player.number || '—'}
       </td>

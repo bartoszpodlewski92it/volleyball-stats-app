@@ -39,7 +39,7 @@ interface StatsTableContentProps {
     onStatChange: OnStatChangeFn;
     teamPoints: number;
     rcStats: { total: number; perfPct: string; goodPct: string; posPct: string };
-    atkStats: { total: number; killPct: string };
+    atkStats: { total: number; killPct: string; effPct: string };
 }
 
 export default function StatsTableContent({ players, onInputChange, onStatChange, teamPoints, rcStats, atkStats }: StatsTableContentProps) {
@@ -76,7 +76,7 @@ export default function StatsTableContent({ players, onInputChange, onStatChange
                     <SubHeader title="Skończone (+)" extraClass="bg-emerald-950/30 text-emerald-400" />
                     <SubHeader title="Błędy (-)" extraClass="bg-rose-950/30 text-rose-400" />
                     <SubHeader title="Nieskończone (/)" extraClass="bg-amber-950/30 text-amber-400" />
-                    <SubHeader title="Skuteczność" extraClass="font-bold text-orange-400" />
+                    <SubHeader title="Analiza Ataku" widthClass="w-40 min-w-[160px]" extraClass="font-bold text-orange-400 bg-orange-950/5" />
 
                     <SubHeader title="Punktowy (+)" extraClass="bg-purple-950/20 text-purple-400" />
                     <SubHeader title="Obronione (+)" extraClass="bg-emerald-950/20 text-emerald-400" />
@@ -87,7 +87,7 @@ export default function StatsTableContent({ players, onInputChange, onStatChange
                     <PlayerRow key={player.id} player={player} onInputChange={onInputChange} onStatChange={onStatChange} />
                 ))}
             </tbody>
-            <tfoot className="bg-slate-900 font-bold border-t-2 border-slate-600 sticky bottom-0 z-10">
+            <tfoot className="bg-slate-900 font-bold border-t-2 border-slate-600 sticky bottom-0 z-10 text-xs">
                 <tr>
                     <td colSpan={2} className="p-3 border border-slate-600 text-center uppercase tracking-wider text-sm text-slate-300">Suma Zespołu</td>
                     <td className="p-2 border border-slate-600 text-center text-lg text-emerald-400 bg-emerald-950/20">{teamPoints}</td>
@@ -112,7 +112,22 @@ export default function StatsTableContent({ players, onInputChange, onStatChange
                     <td className="p-2 border border-slate-600 text-center text-emerald-400">{getTeamSum(players, 'attackKill')}</td>
                     <td className="p-2 border border-slate-600 text-center text-rose-400">{getTeamSum(players, 'attackError')}</td>
                     <td className="p-2 border border-slate-600 text-center text-amber-400">{getTeamSum(players, 'attackCont')}</td>
-                    <td className="p-2 border border-slate-600 text-center text-orange-500 bg-orange-950/20">{atkStats.killPct}</td>
+
+                    <td className="p-2 border border-slate-600 text-center text-orange-500 bg-orange-950/20 min-w-[160px]">
+                        <div className="flex flex-col gap-1 items-center justify-center h-full">
+                            <div className="flex items-center gap-1.5">
+                                <span className="text-slate-400 font-normal">Skuteczność:</span>
+                                <span>{atkStats.killPct}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                                <span className="text-slate-400 font-normal">Efektywność:</span>
+                                <span className="text-amber-400">{atkStats.effPct}</span>
+                            </div>
+                            <div className="text-[10px] text-slate-500 font-normal mt-0.5">
+                                Suma ataków: {atkStats.total}
+                            </div>
+                        </div>
+                    </td>
 
                     <td className="p-2 border border-slate-600 text-center text-purple-400">{getTeamSum(players, 'blockPoint')}</td>
                     <td className="p-2 border border-slate-600 text-center text-emerald-400">{getTeamSum(players, 'digSuccess')}</td>

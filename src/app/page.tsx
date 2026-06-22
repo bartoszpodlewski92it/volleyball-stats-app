@@ -37,8 +37,8 @@ export default function Home() {
   };
 
   const handleStatChange = (
-    id: number, 
-    field: 'attackKill' | 'attackError' | 'attackCont' | 'serveAce' | 'serveCont' | 'serveError' | 'blockPoint' | 'digSuccess' | 'receptionPerfect' | 'receptionGood' | 'receptionInaccurate' | 'receptionError', 
+    id: number,
+    field: 'attackKill' | 'attackError' | 'attackCont' | 'serveAce' | 'serveCont' | 'serveError' | 'blockPoint' | 'digSuccess' | 'receptionPerfect' | 'receptionGood' | 'receptionInaccurate' | 'receptionError',
     amount: 1 | -1
   ) => {
     setPlayers(players.map(p => p.id === id ? { ...p, [field]: Math.max(0, p[field] + amount) } : p));
@@ -76,19 +76,19 @@ export default function Home() {
 
   return (
     <main className="py-6 px-0 bg-amber-950 min-h-screen text-white relative">
-      
+
       <div className="flex justify-between items-center mb-6 px-6">
         <h1 className="text-2xl font-bold">Dashboard Statystyk Siatkarskich</h1>
-        
+
         <div className="flex gap-3">
-          <button 
+          <button
             onClick={() => setIsAddModalOpen(true)}
             className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 rounded transition cursor-pointer text-sm shadow-md"
           >
             + Dodaj Zawodnika
           </button>
-          
-          <button 
+
+          <button
             onClick={() => setIsResetModalOpen(true)}
             className="bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 px-4 rounded transition cursor-pointer text-sm"
           >
@@ -96,7 +96,7 @@ export default function Home() {
           </button>
         </div>
       </div>
-      
+
       {players.length > 0 ? (
         <StatsTable
           players={players}
@@ -110,7 +110,7 @@ export default function Home() {
         </div>
       )}
 
-      <ConfirmModal 
+      <ConfirmModal
         isOpen={isResetModalOpen}
         title="Ostrzeżenie"
         message="Czy na pewno chcesz wyczyścić wszystkie bieżące statystyki i rozpocząć nowy mecz? Tej operacji nie da się cofnąć."
@@ -118,7 +118,7 @@ export default function Home() {
         onCancel={() => setIsResetModalOpen(false)}
       />
 
-      <AddPlayerModal 
+      <AddPlayerModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         onAdd={handleAddPlayer}
