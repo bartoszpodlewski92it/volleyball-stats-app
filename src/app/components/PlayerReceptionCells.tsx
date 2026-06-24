@@ -2,6 +2,7 @@
 
 import { PlayerStats, OnStatChangeFn } from './../types/types';
 import StatCell from './StatCell';
+import { calculateReceptionPercentages } from '../helpers/statCalculators';
 
 interface PlayerReceptionCellsProps {
   player: PlayerStats;
@@ -9,11 +10,12 @@ interface PlayerReceptionCellsProps {
 }
 
 export default function PlayerReceptionCells({ player, onStatChange }: PlayerReceptionCellsProps) {
-  const total = player.receptionPerfect + player.receptionGood + player.receptionInaccurate + player.receptionError;
-
-  const perfPct = total > 0 ? ((player.receptionPerfect / total) * 100).toFixed(2) : '0.00';
-  const goodPct = total > 0 ? ((player.receptionGood / total) * 100).toFixed(2) : '0.00';
-  const posPct = total > 0 ? (((player.receptionPerfect + player.receptionGood) / total) * 100).toFixed(2) : '0.00';
+  const { total, perfPct, goodPct, posPct } = calculateReceptionPercentages(
+    player.receptionPerfect,
+    player.receptionGood,
+    player.receptionInaccurate,
+    player.receptionError
+  );
 
   return (
     <>
