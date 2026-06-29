@@ -46,11 +46,11 @@ export const getTeamAttackStats = (players: PlayerStats[]) => {
   const total = kill + err + cont;
 
   if (total === 0) {
-    return { total, killPct: '0.00%', effPct: '0.00%' };
+    return { total, killPct: '0.00', effPct: '0.00' };
   }
 
-  const effPct = (((kill - err) / total) * 100).toFixed(2) + '%';
-  const killPct = ((kill / total) * 100).toFixed(2) + '%';
+  const effPct = (((kill - err) / total) * 100).toFixed(2);
+  const killPct = ((kill / total) * 100).toFixed(2);
 
   return {
     total,

@@ -82,7 +82,7 @@ export default function StatsTableContent({ players, onInputChange, onStatChange
                     <SubHeader title="Obronione (+)" extraClass="bg-emerald-950/20 text-emerald-400" />
                 </tr>
             </thead>
-            <tbody>
+  <tbody>
                 {players.map((player) => (
                     <PlayerRow key={player.id} player={player} onInputChange={onInputChange} onStatChange={onStatChange} />
                 ))}
@@ -104,9 +104,9 @@ export default function StatsTableContent({ players, onInputChange, onStatChange
                     <td className="p-2 border border-slate-600 text-center text-amber-400">{getTeamSum(players, 'receptionInaccurate')}</td>
                     <td className="p-2 border border-slate-600 text-center text-rose-400">{getTeamSum(players, 'receptionError')}</td>
 
-                    <td className="p-2 border border-slate-600 text-center text-emerald-500 bg-emerald-950/20">{rcStats.perfPct}</td>
-                    <td className="p-2 border border-slate-600 text-center text-teal-500 bg-teal-950/20">{rcStats.goodPct}</td>
-                    <td className="p-2 border border-slate-600 text-center text-yellow-500 bg-yellow-950/20">{rcStats.posPct}</td>
+                    <td className="p-2 border border-slate-600 text-center text-emerald-500 bg-emerald-950/20">{rcStats.perfPct}%</td>
+                    <td className="p-2 border border-slate-600 text-center text-teal-500 bg-teal-950/20">{rcStats.goodPct}%</td>
+                    <td className="p-2 border border-slate-600 text-center text-yellow-500 bg-yellow-950/20">{rcStats.posPct}%</td>
                     <td className="p-2 border border-slate-600 text-center text-sky-400 bg-sky-950/20">{rcStats.total}</td>
 
                     <td className="p-2 border border-slate-600 text-center text-emerald-400">{getTeamSum(players, 'attackKill')}</td>
@@ -117,11 +117,11 @@ export default function StatsTableContent({ players, onInputChange, onStatChange
                         <div className="flex flex-col gap-1 items-center justify-center h-full">
                             <div className="flex items-center gap-1.5">
                                 <span className="text-slate-400 font-normal">Skuteczność:</span>
-                                <span>{atkStats.killPct}</span>
+                                <span>{atkStats.killPct}%</span>
                             </div>
                             <div className="flex items-center gap-1.5">
                                 <span className="text-slate-400 font-normal">Efektywność:</span>
-                                <span className="text-amber-400">{atkStats.effPct}</span>
+                                <span className="text-amber-400">{atkStats.effPct}%</span>
                             </div>
                             <div className="text-[10px] text-slate-500 font-normal mt-0.5">
                                 Suma ataków: {atkStats.total}

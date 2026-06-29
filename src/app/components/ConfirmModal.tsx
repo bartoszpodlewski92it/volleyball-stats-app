@@ -14,9 +14,9 @@ export default function ConfirmModal({ isOpen, title, message, onConfirm, onCanc
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fade-in">
       <div className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl p-6 max-w-sm w-full space-y-4 transform transition-all animate-scale-in">
-        <div className="flex items-center gap-3 text-rose-500">
-          <h2 className="text-xl font-bold text-white">{title}</h2>
-        </div>
+        <h2 className="text-xl font-bold text-white border-b border-slate-700 pb-2">
+          {title}
+        </h2>
 
         <p className="text-slate-300 text-sm leading-relaxed">
           {message}

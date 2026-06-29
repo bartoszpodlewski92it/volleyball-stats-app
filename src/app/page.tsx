@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { PlayerStats } from './types/types';
 import StatsTable from './components/StatsTable';
 import ConfirmModal from './components/ConfirmModal';
@@ -32,19 +32,23 @@ export default function Home() {
     }
   }, [players, isLoaded]);
 
-  const handleInputChange = (id: number, field: 'number' | 'name', value: string) => {
-    setPlayers(players.map(p => p.id === id ? { ...p, [field]: value } : p));
-  };
+  const handleInputChange = useCallback((id: number, field: 'number' | 'name', value: string) => {
+    setPlayers(prevPlayers => 
+      prevPlayers.map(p => p.id === id ? { ...p, [field]: value } : p)
+    );
+  }, []);
 
-  const handleStatChange = (
+  const handleStatChange = useCallback((
     id: number,
     field: 'attackKill' | 'attackError' | 'attackCont' | 'serveAce' | 'serveCont' | 'serveError' | 'blockPoint' | 'digSuccess' | 'receptionPerfect' | 'receptionGood' | 'receptionInaccurate' | 'receptionError',
     amount: 1 | -1
   ) => {
-    setPlayers(players.map(p => p.id === id ? { ...p, [field]: Math.max(0, p[field] + amount) } : p));
-  };
+    setPlayers(prevPlayers => 
+      prevPlayers.map(p => p.id === id ? { ...p, [field]: Math.max(0, p[field] + amount) } : p)
+    );
+  }, []);
 
-  const handleAddPlayer = (number: string, name: string) => {
+  const handleAddPlayer = useCallback((number: string, name: string) => {
     const newPlayer: PlayerStats = {
       id: Date.now(),
       number,
@@ -62,13 +66,13 @@ export default function Home() {
       receptionInaccurate: 0,
       receptionError: 0,
     };
-    setPlayers([...players, newPlayer]);
-  };
+    setPlayers(prevPlayers => [...prevPlayers, newPlayer]);
+  }, []);
 
-  const confirmReset = () => {
+  const confirmReset = useCallback(() => {
     setPlayers(initialRows);
     setIsResetModalOpen(false);
-  };
+  }, []);
 
   if (!isLoaded) {
     return <main className="p-6 bg-amber-950 min-h-screen text-white">Ładowanie dashboardu...</main>;

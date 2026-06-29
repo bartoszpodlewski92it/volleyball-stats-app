@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { PlayerStats, OnStatChangeFn } from './../types/types';
 import StatCell from './StatCell';
 
@@ -9,9 +10,13 @@ interface PlayerAttackCellsProps {
 }
 
 export default function PlayerAttackCells({ player, onStatChange }: PlayerAttackCellsProps) {
-  const total = player.attackKill + player.attackError + player.attackCont;
-  const killPct = total > 0 ? ((player.attackKill / total) * 100).toFixed(2) : '0.00';
-  const effPct = total > 0 ? (((player.attackKill - player.attackError) / total) * 100).toFixed(2) : '0.00';
+  const { total, killPct, effPct } = useMemo(() => {
+    const t = player.attackKill + player.attackError + player.attackCont;
+    const kill = t > 0 ? ((player.attackKill / t) * 100).toFixed(2) : '0.00';
+    const eff = t > 0 ? (((player.attackKill - player.attackError) / t) * 100).toFixed(2) : '0.00';
+    
+    return { total: t, killPct: kill, effPct: eff };
+  }, [player.attackKill, player.attackError, player.attackCont]);
 
   return (
     <>

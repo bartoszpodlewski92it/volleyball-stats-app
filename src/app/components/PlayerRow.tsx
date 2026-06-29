@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo, memo } from 'react';
 import { PlayerStats, OnInputChangeFn, OnStatChangeFn } from '../types/types';
 import PlayerAttackCells from './PlayerAttackCells';
 import PlayerServeCells from './PlayerServeCells';
@@ -13,8 +14,10 @@ interface PlayerRowProps {
   onStatChange: OnStatChangeFn;
 }
 
-export default function PlayerRow({ player, onInputChange, onStatChange }: PlayerRowProps) {
-  const totalPoints = calculatePoints(player);
+const PlayerRow = memo(function PlayerRow({ player, onInputChange, onStatChange }: PlayerRowProps) {
+  const totalPoints = useMemo(() => {
+    return calculatePoints(player);
+  }, [player.serveAce, player.attackKill, player.blockPoint]);
 
   return (
     <tr className="border-b border-slate-700 hover:bg-slate-700/40 transition-colors">
@@ -37,4 +40,6 @@ export default function PlayerRow({ player, onInputChange, onStatChange }: Playe
       <StatCell playerId={player.id} field="digSuccess" value={player.digSuccess} onStatChange={onStatChange} accentClass="text-emerald-400" />
     </tr>
   );
-}
+});
+
+export default PlayerRow;

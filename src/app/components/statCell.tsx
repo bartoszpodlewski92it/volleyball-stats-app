@@ -1,6 +1,7 @@
 'use client';
 
-import { PlayerStats, OnStatChangeFn } from './../types/types';
+import { memo } from 'react';
+import { OnStatChangeFn } from './../types/types';
 import StatControl from './StatControl';
 
 interface StatCellProps {
@@ -11,7 +12,7 @@ interface StatCellProps {
   accentClass?: string;
 }
 
-export default function StatCell({ playerId, field, value, onStatChange, accentClass }: StatCellProps) {
+const StatCell = memo(function StatCell({ playerId, field, value, onStatChange, accentClass }: StatCellProps) {
   return (
     <td className="p-2 border border-slate-600 text-center">
       <StatControl 
@@ -22,4 +23,6 @@ export default function StatCell({ playerId, field, value, onStatChange, accentC
       />
     </td>
   );
-}
+});
+
+export default StatCell;

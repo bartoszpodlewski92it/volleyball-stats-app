@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { PlayerStats, OnStatChangeFn } from './../types/types';
 import StatCell from './StatCell';
 import { calculateReceptionPercentages } from '../helpers/statCalculators';
@@ -10,12 +11,14 @@ interface PlayerReceptionCellsProps {
 }
 
 export default function PlayerReceptionCells({ player, onStatChange }: PlayerReceptionCellsProps) {
-  const { total, perfPct, goodPct, posPct } = calculateReceptionPercentages(
-    player.receptionPerfect,
-    player.receptionGood,
-    player.receptionInaccurate,
-    player.receptionError
-  );
+  const { total, perfPct, goodPct, posPct } = useMemo(() => {
+    return calculateReceptionPercentages(
+      player.receptionPerfect,
+      player.receptionGood,
+      player.receptionInaccurate,
+      player.receptionError
+    );
+  }, [player.receptionPerfect, player.receptionGood, player.receptionInaccurate, player.receptionError]);
 
   return (
     <>

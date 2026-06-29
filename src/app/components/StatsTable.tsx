@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import { PlayerStats, OnInputChangeFn, OnStatChangeFn } from '../types/types';
 import StatsTableContent from './StatsTableContent';
 import { 
@@ -34,7 +34,7 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
 
     resizeObserver.observe(tableContainerRef.current);
     return () => resizeObserver.disconnect();
-  }, [players]);
+  }, []);
 
   const handleFakeScroll = () => {
     if (fakeScrollRef.current && tableContainerRef.current) {
@@ -48,9 +48,13 @@ export default function StatsTable({ players, onInputChange, onStatChange }: Sta
     }
   };
 
-  const teamPoints = getTeamTotalPoints(players);
-  const rcStats = getTeamReceptionStats(players);
-  const atkStats = getTeamAttackStats(players);
+  const { teamPoints, rcStats, atkStats } = useMemo(() => {
+    return {
+      teamPoints: getTeamTotalPoints(players),
+      rcStats: getTeamReceptionStats(players),
+      atkStats: getTeamAttackStats(players)
+    };
+  }, [players]);
 
   return (
     <div className="w-full relative pb-6">
