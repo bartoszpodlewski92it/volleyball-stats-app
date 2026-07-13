@@ -1,6 +1,8 @@
 Volleyball Stats App
 
-Aplikacja webowa stworzona w Next.js służąca do rejestrowania, kalkulacji oraz zaawansowanej analizy statystyk siatkarskich w czasie rzeczywistym.
+Live Demo: [volleyball-stats-app](https://volleyball-stats-app-azure.vercel.app/)
+
+Aplikacja webowa desktopowa stworzona w Next.js służąca do rejestrowania, kalkulacji oraz zaawansowanej analizy statystyk siatkarskich w czasie rzeczywistym.
 
 Funkcje i komponenty projektu:
 
@@ -56,7 +58,9 @@ src/app/
 
 Volleyball Stats App
 
-A web application built with Next.js designed for real-time tracking, calculation, and advanced analysis of volleyball statistics.
+Live Demo: [volleyball-stats-app](https://volleyball-stats-app-azure.vercel.app/)
+
+A web application desktop built with Next.js designed for real-time tracking, calculation, and advanced analysis of volleyball statistics.
 
 Features and Components:
 
